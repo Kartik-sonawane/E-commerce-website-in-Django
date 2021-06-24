@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block main-content %}
+
+<div class="container">
+ <div class="row my-3">
+
+  <div class="col-sm-6 offset-sm-3">
+   <!-- <h3>Login</h3>
+   <hr> -->
+
+
+  <!-- For errors display  -->
+    
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="alert alert-danger mt-4">{{error}}</p>
+    {% endfor %}
+    {% endif %} 
+
+   <form action="" method="post" novalidate class="shadow p-5 mt-5">
+    {% csrf_token %}
+    
+    
+  <!-- For form display    -->
+      {% for fm in form %}
+        <div class="form-group mb-4">
+             {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+        </div>
+      {% endfor %}
+         
+        <small class="d-flex justify-content-end"><a href="{% url 'password_reset' %}" class="text-decoration-none">Forgot Password ?</a></small>
+        <br>
+
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+        <br>
+    
+        <div class="text-center text-primary fw-bold mt-3">
+            <small>New to ShoppingZone ? &nbsp;&nbsp; <a href="{% url 'customerregistration' %}"
+                class="text-danger text-decoration-none">Create an Account</a> 
+            </small>
+        </div>
+
+   </form>
+  </div>   <!--end col-6 -->
+
+ </div>   <!--end Main Row-->
+</div>   <!--end Main Container-->
+
+{% endblock main-content %}
